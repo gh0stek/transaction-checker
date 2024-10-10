@@ -1,4 +1,4 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 
 /**
  *
@@ -10,21 +10,23 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
  *
  */
 
+export class QueryParams {}
+
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    try {
-        return {
-            statusCode: 200,
-            body: JSON.stringify({
-                message: 'test',
-            }),
-        };
-    } catch (err) {
-        console.log(err);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({
-                message: 'some error happened',
-            }),
-        };
+  try {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: 'test',
+      }),
     }
-};
+  } catch (err) {
+    console.log(err)
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        message: 'some error happened',
+      }),
+    }
+  }
+}
