@@ -1,4 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
+import { Transform, plainToClass } from 'class-transformer'
+import { IsDateString, IsOptional, IsString, validate, isString } from 'class-validator'
 
 /**
  *
@@ -10,10 +12,26 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
  *
  */
 
-export class QueryParams {}
+class QueryParams {
+  @IsOptional()
+  @IsDateString()
+  @Transform(({ value }) => new Date(value))
+  startDate?: Date
+
+  @IsOptional()
+  @IsDateString()
+  @Transform(({ value }) => new Date(value))
+  endDate?: Date
+
+  @IsOptional()
+  @IsString({ each: true })
+  @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
+  token?: string[]
+}
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
+    const queryParams = plainToClass(QueryParams, event.queryStringParameters)
     return {
       statusCode: 200,
       body: JSON.stringify({
