@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "target": "es2022",
+        "strict": true,
+        "preserveConstEnums": true,
+        "experimentalDecorators": true,
+        "noEmit": true,
+        "sourceMap": false,
+        "module": "node16",
+        "moduleResolution": "node16",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "/Users/bartek/sources/redstone-transactions-checker",
+        "rootDir": ".",
+        "sourceRoot": "/Users/bartek/sources/redstone-transactions-checker",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "types": [
+            "node"
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        "**/*.test.ts"
+    ]
+}

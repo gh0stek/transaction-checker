@@ -2,7 +2,7 @@
   "name": "transaction-checker",
   "version": "1.0.0",
   "description": "checks if tokens exists in transactions",
-  "main": "app.js",
+  "main": "src/app.js",
   "author": "SAM CLI",
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,7 @@
     "lint": "eslint '*.ts' --quiet --fix",
     "compile": "tsc",
     "test": "npm run compile && npm run unit",
-    "start:debug": "cd .. && sam local start-api --debug"
+    "run:debug": "node -r ts-node/register event-test/invoke.ts"
   },
   "dependencies": {
     "class-transformer": "~0.5.1",
@@ -24,6 +24,7 @@
     "@types/node": "~22.7.5",
     "@typescript-eslint/eslint-plugin": "~8.8.1",
     "@typescript-eslint/parser": "~8.8.1",
+    "dotenv": "~16.4.5",
     "eslint": "~9.12.0",
     "eslint-config-prettier": "~9.1.0",
     "eslint-plugin-prettier": "~5.2.1",

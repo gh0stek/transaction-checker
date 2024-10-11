@@ -5,6 +5,16 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "ts-node",
+      "type": "node",
+      "request": "launch",
+      "args": ["event-test/invoke.ts"],
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
       "type": "aws-sam",
       "request": "direct-invoke",
       "name": "redstone-transactions-checker:TransactionCheckerFunction (nodejs20.x)",
@@ -22,6 +32,7 @@
       "type": "aws-sam",
       "request": "direct-invoke",
       "name": "API redstone-transactions-checker:TransactionCheckerFunction (nodejs20.x)",
+
       "invokeTarget": {
         "target": "api",
         "templatePath": "${workspaceFolder}/template.yaml",
