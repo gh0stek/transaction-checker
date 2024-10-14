@@ -6,7 +6,7 @@ import { logger } from './logger'
 import { getManifest } from './manifest'
 import { TransactionService } from './arweave'
 import { getDataPackage } from './data-package'
-import { validateSignature } from './signature'
+import { SignatureService } from './signature'
 
 class BodyParams {
   @IsDefined()
@@ -32,7 +32,7 @@ class Lambda implements LambdaInterface {
    *
    */
   @logger.injectLambdaContext({
-    logEvent: process.env.NODE_ENV === 'xlocal',
+    logEvent: process.env.NODE_ENV === 'local',
   })
   // eslint-disable-next-line
   public async handler(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {
@@ -58,7 +58,7 @@ class Lambda implements LambdaInterface {
         return {
           statusCode: 500,
           body: JSON.stringify({
-            message: 'Internal server error',
+            message: 'Internal server error1',
           }),
         }
       }
@@ -78,6 +78,8 @@ class Lambda implements LambdaInterface {
         dataFeedIds = Object.keys(manifest.tokens)
       }
 
+      const signatureService = await SignatureService.getInstance()
+
       const transactionService = TransactionService.getInstance()
       const pageSize = 100
       const getNextPage = async (cursor?: string) => {
@@ -92,7 +94,7 @@ class Lambda implements LambdaInterface {
           ...edges.map(async (edge) => {
             const dataFeedId = edge.node.tags.find((tag) => tag.name === 'dataFeedId')?.value
             const dataPackage = await getDataPackage(edge.node.id)
-            const isValid = validateSignature(dataPackage)
+            const isValid = signatureService.validateSignature(dataPackage)
             if (!isValid || !dataFeedId) {
               return
             }
@@ -127,7 +129,7 @@ class Lambda implements LambdaInterface {
       return {
         statusCode: 500,
         body: JSON.stringify({
-          message: 'internal server error',
+          message: 'Internal server error2',
         }),
       }
     }

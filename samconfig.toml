@@ -34,9 +34,9 @@ warm_containers = "EAGER"
 warm_containers = "EAGER"
 
 [private.deploy.parameters]
-stack_name = "test"
+stack_name = "transavtion-checker"
 resolve_s3 = true
-s3_prefix = "test"
+s3_prefix = "transavtion-checker"
 region = "eu-central-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"

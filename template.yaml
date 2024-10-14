@@ -8,7 +8,7 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 420
 
 Resources:
   TransactionCheckerFunction:
@@ -17,6 +17,7 @@ Resources:
       CodeUri: .
       Handler: app.lambdaHandler
       Runtime: nodejs20.x
+      MemorySize: 512
       Architectures:
         - x86_64
       Events:
@@ -27,9 +28,7 @@ Resources:
             Method: post
       Environment:
         Variables:
-          NODE_ENV: local
-          MANIFEST_URL: https://raw.githubusercontent.com/redstone-finance/redstone-oracles-monorepo/refs/heads/main/packages/oracle-node/manifests/data-services/primary.json
-          ARWEAVE_GQL_URL: https://arweave-search.goldsky.com/graphql
+          POWERTOOLS_SERVICE_NAME: 'TransactionChecker'
     Metadata: # Manage esbuild properties
       BuildMethod: esbuild
       BuildProperties:

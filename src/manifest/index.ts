@@ -45,6 +45,11 @@ export async function getManifest() {
     logger.error('MANIFEST_URL is not defined')
     throw new Error('MANIFEST_URL is not defined')
   }
-  const response = await axios.get<Manifest>(process.env.MANIFEST_URL)
-  return response.data
+  try {
+    const response = await axios.get<Manifest>(process.env.MANIFEST_URL)
+    return response.data
+  } catch (error) {
+    logger.error('Failed to get manifest', { error })
+    throw error
+  }
 }
