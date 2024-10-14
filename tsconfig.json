@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es2022",
+    "target": "ES2023",
     "strict": true,
     "preserveConstEnums": true,
     "experimentalDecorators": true,
-    "noEmit": true,
-    "sourceMap": false,
-    "module": "node16",
-    "moduleResolution": "node16",
-    "esModuleInterop": true,
+    "noEmit": false,
+    "sourceMap": true,
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noImplicitAny": true
   },
   "exclude": ["node_modules", "**/*.test.ts"]
 }

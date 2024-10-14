@@ -24,12 +24,17 @@ Resources:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /transaction-checker
-            Method: get
+            Method: post
+      Environment:
+        Variables:
+          NODE_ENV: local
+          MANIFEST_URL: https://raw.githubusercontent.com/redstone-finance/redstone-oracles-monorepo/refs/heads/main/packages/oracle-node/manifests/data-services/primary.json
+          ARWEAVE_GQL_URL: https://arweave-search.goldsky.com/graphql
     Metadata: # Manage esbuild properties
       BuildMethod: esbuild
       BuildProperties:
         Minify: true
-        Target: "es2020"
+        Target: "es2023"
         Sourcemap: true
         EntryPoints: 
         - src/app.ts

@@ -8,11 +8,32 @@
       "name": "ts-node",
       "type": "node",
       "request": "launch",
-      "args": ["event-test/invoke.ts"],
+      "args": ["tests/event/invoke.ts"],
       "runtimeArgs": ["-r", "ts-node/register"],
       "cwd": "${workspaceRoot}",
-      "protocol": "inspector",
+      "console": "integratedTerminal",
       "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "tsx",
+      "type": "node",
+      "request": "launch",
+
+      "program": "tests/event/invoke.ts",
+      "envFile": "${workspaceFolder}/.env",
+      "preLaunchTask": "npm: compile",
+      "runtimeExecutable": "tsx",
+
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+
+      "skipFiles": [
+        // Node.js internal core modules
+        "<node_internals>/**",
+
+        // Ignore all dependencies (optional)
+        "${workspaceFolder}/node_modules/**"
+      ]
     },
     {
       "type": "aws-sam",
@@ -40,7 +61,7 @@
       },
       "api": {
         "path": "/transaction-checker",
-        "httpMethod": "get",
+        "httpMethod": "post",
         "payload": {
           "json": {}
         }
